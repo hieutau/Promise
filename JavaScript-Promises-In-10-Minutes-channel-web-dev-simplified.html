@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+// Promise example easy
+    // let p = new Promise((resolve, reject) => {
+    //     let a = 1 + 2;
+    //     if (a == 2) {
+    //         resolve('Success');
+    //     }else {
+    //         reject('Failed');
+    //     }
+    // })
+
+    // p.then(message => {
+    //     console.log('This is in the then: ' + message);
+    // }).catch(message => {
+    //     console.log('This is in the catch: ' + message);
+    // });
+
+
+// Callback example
+    // const userLeft = false;
+    // const userWatchingCatMeme = false;
+
+    // function watchTutorialCallback(callback, errorCallback) {
+    //     if (userLeft) {
+    //         errorCallback({
+    //             name: 'User Left', 
+    //             message: ':('
+    //         })
+    //     } else if (userWatchingCatMeme) {
+    //         errorCallback({
+    //             name: 'User Watching Cat Meme',
+    //             message: 'WebDevSimplified < Cat'
+    //         })
+    //     } else {
+    //         callback('thumbs up and subscribe');
+    //     }
+    // }
+
+    // watchTutorialCallback(message => {
+    //     console.log('Success: ' + message)
+    // }, err => {
+    //     console.log(err.name + " " + err.message)
+    // })
+
+
+// Return from callback example above to promise is here:
+
+    // const userLeft = false;
+    // const userWatchingCatMeme = false;
+
+    // function watchTutorialPromise() {
+    //     return new Promise((resolve, reject) => {
+    //         if (userLeft) {
+    //             reject({
+    //                 name: 'User Left', 
+    //                 message: ':('
+    //             })
+    //         } else if (userWatchingCatMeme) {
+    //             reject({
+    //                 name: 'User Watching Cat Meme',
+    //                 message: 'WebDevSimplified < Cat'
+    //             })
+    //         } else {
+    //             resolve('thumbs up and subscribe');
+    //         }
+    //     })
+    // }
+
+    // watchTutorialPromise()
+    // .then( (message) => {
+    //     console.log('Success: ' + message);
+    // })
+    // .catch( (err) => {
+    //     console.log(err.name + " " + err.message);
+    // })
+
+
+// promise.all(), promise.race()
+
+    const recordVideoOne = new Promise((resolve, reject) => {
+        resolve ('Video 1 recorded')
+    })
+
+    const recordVideoTwo = new Promise((resolve, reject) => {
+        resolve ('Video 2 recorded')
+    })
+
+    const recordVideoThree = new Promise((resolve, reject) => {
+        resolve ('Video 3 recorded')
+    })
+
+    // Promise.race([recordVideoOne, recordVideoTwo, recordVideoThree])
+        // cho ra kết quả ngay khi promise đầu tiên được resolved hoặc reject.
+
+    Promise.all([recordVideoOne, recordVideoTwo, recordVideoThree])
+        // cho ra kết quả của thất cả các promise kể cả có resolved hay reject và các promise này chạy song song với nhau chứ không phải chạy theo dòng chảy.
+        // kết quả trả về sẽ ở dạng mảng.
+        
+    .then(message => { console.log(message); })
+    // .catch(error => console.log(error));
+</script>
+</body>
+</html>

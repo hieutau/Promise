@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="toogle-switch.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="btn">Make a promise!<br></div>
+    <div id="log"></div>
+    <script>
+        'use strict';
+        var promiseCount = 0;
+
+        function testPromise() {
+            let thisPromiseCount = ++promiseCount;
+
+            let log = document.getElementById('log');
+            log.insertAdjacentHTML('beforeend', thisPromiseCount + ') Started (<small>Sync code started</small>)<br><br>');
+
+            let p1 = new Promise((resolve, reject) => {
+                log.insertAdjacentHTML('beforeend', thisPromiseCount + ') Promise started (<small>Async code started</small>)<br><br>');
+                window.setTimeout(function() {
+                    resolve(thisPromiseCount);
+                }, Math.random()*2000 + 1000);
+            });
+
+            p1.then((val) => { 
+                log.insertAdjacentHTML('beforeend', val + ') Promise fullfilled (<small>Async code terminated</small>)<br><br>');
+                }).catch((reson) => {
+                console.log('Handle rejected promise ('+reson+') here.');
+                // cố tình tạo bug ở một số lỗi cú pháp như beforeend có thể viết sai thành gì đó rồi sẽ được báo lỗi
+            });
+
+            log.insertAdjacentHTML('beforeend', thisPromiseCount + ') Promise made (<small> Sync code terminated</small>)<br><br>');
+        }
+
+        if ("Promise" in window) {
+            // "Promise" in window là Native JavaScript Promises are supported in a modern browsers hay không
+            // Có thể thay thế bằng:   window.Promise
+            let btn = document.getElementById("btn");
+            btn.addEventListener("click",testPromise);
+        } else {
+            log = document.getElementById('log');
+            log.innerHTML = "Live example not available as your browser doesn't support the <code>Promise<code> interface.";
+        }
+    </script>
+</body>
+</html>

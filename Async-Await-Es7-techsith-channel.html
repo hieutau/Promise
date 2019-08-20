@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>async</title>
+</head>
+<body>
+
+
+    <!-- <script>
+        // Example basic about promise
+        var promise1 = new Promise(function(resolve, reject) {
+        setTimeout(function() {
+            resolve('foo');
+        }, 300);
+        });
+
+        promise1.then(function(value) {
+        console.log(value);
+        // expected output: "foo"
+        });
+
+        // promise1.then();    // không chạy vì không gán cho .then 1 function
+
+        console.log(promise1);    
+    </script> -->
+
+
+    <!-- <script>
+       // Don't use await/sync 
+       console.log('Person1: shows ticket'); 
+       console.log('Person2: shows ticket');
+
+       const person3 = new Promise((resolve, reject) => {
+        setTimeout((t) => {
+            resolve(3);
+        }, 1000);
+       });
+
+    //    console.log(person3);
+
+       const getPopcorn = person3.then((t) => {
+           console.log('husband: we should go in');
+           console.log('wife: no, i am hungry');
+           return new Promise((resolve, reject) => {
+               resolve(t);
+           })
+       })
+
+    //    console.log(getPopcorn);
+
+       const getButton = getPopcorn.then((t) => {
+           console.log(`${t} Popcorn`);
+           console.log('husband: Oke yet');
+           console.log('wife: I want button')
+           return new Promise((resolve, reject) => {
+               resolve(t);
+           })
+       })
+
+       getButton.then(t => {console.log(`${t-1} button`)});
+
+       console.log('Person4: shows ticket'); 
+       console.log('Person5: shows ticket'); 
+
+       // có thể thấy là chỉ khi cô vợ lấy được Popcorn thì sau đó mới có button. Như vậy nếu muôn lấy button mà k cần mua Popcorn thì phải làm thế nào? 
+       // thực ra cũng chỉ cần thay getButton thành persond3 là được. Nhưng thôi, ta đến với nội dung tiếp theo
+
+       // ==> async/await
+
+    </script> -->
+
+    <!-- <script>
+    // ASYNC/AWAIT
+
+        console.log('Person1: shows ticket');
+        console.log('Person2: shows ticket');
+
+        const preMove = async () => {
+
+            const getTicket = new Promise ((resolve, reject) => {
+                setTimeout(() => resolve('ticket'), 3000);
+            });
+
+            // return getTicket;
+
+            // let ticket = await getTicket;
+            // console.log('show');
+            // return ticket; 
+
+            // console.log(getTicket.then());
+            // console.log('Tao đ thich chờ');
+            // return getTicket.then(); 
+            // trả về 1 promise khac cho preMove
+
+            // console.log(getTicket);    // return promise
+            
+            const getPopcorn = new Promise((resolve, reject) => resolve('popcorn'));
+            const getButter = new Promise((resolve, reject) => resolve('butter'));
+
+            let ticket = await getTicket;
+            
+            console.log(`Girl: I want 2 ${ticket} watch movies`);
+            console.log('Boy: okey baby');
+            console.log('Girl: I am hungry');
+
+            let popcorn = await getPopcorn;
+
+            console.log(`Boy: I have 2 ${popcorn} for you here`);
+            console.log('Girl: I want a little butter');
+            console.log('Boy: I will buy for you');
+ 
+            let butter = await getButter;
+
+            console.log(`Boy: I have ${butter} so.. `);
+            // console.log(`It depends on how today`);
+
+            // return ticket;
+            
+        };
+
+        // preMove().then(t => console.log(t));
+        preMove();
+
+        console.log('Person4: shows ticket');
+        console.log('Person5: shows ticket');
+    
+    </script> -->
+    
+
+    <script>
+        // Promise all 
+
+        console.log('person1 shows ticket');
+        console.log('person2 shows ticket');
+
+        const preMovie = async () => {
+
+        const person3PromiseToShowTicketWhenWifeArrives = new Promise((resolve, reject) => {
+            setTimeout(() => resolve('ticket'), 3000);
+        });
+        const getPopcorn =  new Promise((resolve, reject) => {
+                setTimeout(() => resolve('popcorn'), 3000);
+        });
+        
+        const getCandy =  new Promise((resolve, reject) => {
+                setTimeout(() => resolve('candy'), 3000);
+        });
+        
+        const getCoke =  new Promise((resolve, reject) => {
+                setTimeout(() => resolve('coke'), 3000);
+        });
+
+        let ticket = await person3PromiseToShowTicketWhenWifeArrives;
+        
+            let [ popcorn, candy, coke ] =
+            await Promise.all([ getPopcorn, getCandy, getCoke  ]);
+            // Nếu không có await ở đây biến gán vào sẽ bị delay theo settimeout nên sẽ gây ra lỗi cú pháp
+
+            Promise.all([ getPopcorn, getCandy, getCoke ]).then(value => console.log(value));
+
+            // console.log(`got ${popcorn}, ${candy}, ${coke}`);
+
+        
+        return ticket;
+        
+        };
+
+        preMovie().then((t) => console.log(`person3 shows ${t}`));
+
+        console.log('person4 shows ticket');
+
+    </script>
+
+</body>
+</html>

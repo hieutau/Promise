@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+    // example 1
+        // var clearnRoom = new Promise((resolve, reject) => {
+        //     return resolve('Clearn the room');
+        // })
+        // var removeGarbage = new Promise((resolve, reject) => {
+        //     return resolve('Remve Garbage');
+        // })
+        // var winIcecream = new Promise((resolve, reject) => {
+        //     return resolve('Win Icecream');
+        // })
+        // clearnRoom.then(result => {
+        //     // console.log(typeof clearnRoom);
+        //     // console.log(result);
+        //     return removeGarbage;
+        // }).then(result =>  {
+        //     // console.log(result);
+        //     return winIcecream;
+        // }).then(result => {
+        //     // console.log(result);
+        //     console.log('finish!');
+        // })
+
+    // example 2 the same things
+        var clearnRoom = function() {
+            return new Promise((resolve, reject) => {
+                resolve('Clearn Room - ');
+            })
+        }
+        var removeTrash = function(message) {
+            return new Promise((resolve, reject) => {
+                resolve(message + 'Remove Trash - ');
+            })
+        }
+        var iceCream = function(message) {
+            return new Promise((resolve, reject) => {
+                resolve(message + 'Eat Cream');
+            })
+        }
+
+        // cách này sẽ là thực hiện theo dòng chảy từ clearnRoom tới iceCream 
+        // nên nếu muốn 3 function này chạy trực tiếp và cùng 1 lúc với nhau thì sử dụng promise.all()
+
+        // clearnRoom().then(result => {
+        //     // console.log(result);
+        //     return removeTrash(result);
+        // }).then(result => {
+        //     // console.log(result);
+        //     return iceCream(result);
+        // }).then(result => {
+        //     console.log(result);iny
+        // })
+
+
+        // Use Promise.all()
+        Promise.all([clearnRoom(), removeTrash(), iceCream()])
+        // .then(result => {
+        //     console.log(result);
+        // })  
+        .then(() => {
+            console.log('finish!');
+        })  
+    </script>
+</body>
+</html>

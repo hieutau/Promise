@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <img src="" id="rainbow" alt="">
+    <script>
+      // async function f() {
+      //   var promise = new Promise((resolve, reject) => {
+      //     setTimeout(() => resolve('done'), 1000);
+      //   })
+      //   // promise.then((x) => console.log(x))
+
+      //   let result = await promise; // wait till the promise resolves 
+      //   alert(result);
+      // }
+      // f();
+
+      // class thenable {
+      //   constructor(num){
+      //     this.num = num;
+      //   }
+      //   then(resolve, reject) {
+      //     alert(resolve);
+      //     // resolve with this.num*2 after 1000ms
+      //     setTimeout(() => resolve(this.num*2), 1000);
+      //   }
+      // };
+
+      // async function f() {
+      //   // waits for 1 second, then result becomes 2
+      //   let result = await new thenable(1);
+      //   alert(result);
+      // }
+      // f();
+
+
+    // CALLBACK
+      // function wait(ms, cb) {
+        
+      //   setTimeout(cb, ms) // xem wait hoat dong
+        
+      //   // cb(); // chay tu dau den cuoi khong xem wait hoat dong
+      // }
+
+      // function main() {
+      //   console.log('sap roi...')
+      //   wait(2019, () => {
+      //     console.log('day...')
+      //     wait(2018, () => {
+      //       console.log('day ma...')
+      //       wait(2017, () => {
+      //         console.log('Oke roi')
+      //       })
+      //     })
+      //   })
+      // }
+
+      // main();
+
+    
+    // Promise
+      // vẫn gặp tình trạng promise hell, tương tự với callback hell
+
+      // function wait(ms) {
+      //   return new Promise(r => setTimeout(r, ms))
+      // }
+
+      // function main() {
+      //   console.log('sap roi..')
+      //   wait(2019).then(() => {
+      //     console.log('day..')
+      //     wait(2018).then(() => {
+      //       console.log('day ma...')
+      //       wait(2017).then(() => {
+      //         console.log('Oke roi')
+      //       })
+      //     })
+      //   })
+      // }
+    
+      // main();
+
+
+    // Async/await 
+      // sẽ không còn hell nữa :)))
+
+      // function wait(ms){
+      //   return new Promise(r => setTimeout(r, ms));
+      // }
+
+      // async function main(){
+      //   console.log('Sap roi..')
+      //   await wait(2019)
+      //   console.log('day..')
+      //   await wait(2018)
+      //   console.log('day ma..')
+      //   await wait(2017)
+      //   console.log('oke')
+      // }
+
+      // main()
+
+    
+    // Try catch
+
+      // function wait(ms){
+      //   return new Promise(r => setTimeout(r, ms));
+      // }
+
+      // async function run(){
+      //   console.log('Sap roi..')
+      //   await wait(2019)
+      //   console.log('day..')
+      //   await wait(2018)
+      //   console.log('day ma..')
+      //   await wait(2017)
+      //   // throw new Error(2016)
+      //   console.log('Good')
+      // }
+
+      // async function main() {
+      //   try {
+      //     await run();
+      //     console.log('Xong roi day')
+      //   }catch(e) {
+      //     console.log(`co loi tai ${e}`)
+      //   }
+      // }
+
+      // main()
+
+
+    // error handling
+      function wait() {
+        return new Promise((resolve, reject) => {
+          const val = Math.round(Math.random() *1);
+          val ? resolve('Lucky!!') : reject('Nope 😠');
+        });
+      }
+
+      async function main() {
+        try {
+          const msg = await wait();
+          console.log(msg);
+        }catch(e) {
+          console.log(e);
+        }
+      }
+      main()
+      main()
+      main()
+      main()
+      main()
+      main()
+      main()
+    </script>
+</body>
+</html>
